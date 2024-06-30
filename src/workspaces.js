@@ -56,3 +56,5 @@ class WorkspaceManager {
     }
 
 }
+
+export { Workspace, WorkspaceManager }

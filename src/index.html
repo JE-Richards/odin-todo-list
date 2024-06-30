@@ -7,7 +7,7 @@
 </head>
 <body>
     <form action="" id="newTodoForm">
-        <h1>New Task</h1>
+        <h1>New Todo</h1>
         <div id="newTodoTitleInput">
             <label for="newTodoTitle">Title</label>
             <input type="text" name="newTodoTitle" id="newTodoTitle" minlength="1" required>
@@ -48,6 +48,17 @@
                 <button type="submit" id="newTodoFormSubmit" form="newTodoForm">Add Task</button>
                 <button id="newTodoFormCancel">Cancel</button>
             </div>
+        </div>
+    </form>
+    <form action="" id="newWorkspaceForm">
+        <h1>New Workspace</h1>
+        <div id="newWorkspaceNameInput">
+            <label for="newWorkspaceName">Name</label>
+            <input type="text" name="newWorkspaceName" id="newWorkspaceName" minlength="1" required>
+        </div>
+        <div id="newWorkspaceInputBtns">
+            <button type="submit" id="newWorkspaceFormSubmit" form="newWorkspaceForm">Add Task</button>
+            <button id="newTodoFormCancel">Cancel</button>
         </div>
     </form>
 </body>

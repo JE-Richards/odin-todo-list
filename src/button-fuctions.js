@@ -1,10 +1,11 @@
 import { Todo } from './todo.js';
+import { Workspace, WorkspaceManager } from './workspaces.js';
 
 function cancelBtn() {
     dialog.close();
 }
 
-function addNewTask(){
+function addNewTodo() {
     const title = document.getElementById('newTodoTitle').value;
     const desc = document.getElementById('newTodoDesc').value;
     const dueDate = document.getElementById('newTodoDueDate').value;
@@ -16,8 +17,12 @@ function addNewTask(){
             priority = newTodoPriorityRadios[i].value;
         }
     }
-
-    console.log(new Todo(title, desc, dueDate, priority));
 }
 
-export { cancelBtn, addNewTask }
+function addNewWorkspace() {
+    const name = document.getElementById('newWorkspaceName').value;
+
+    WorkspaceManager.addToWorkspace(new Workspace(name));
+}
+
+export { cancelBtn, addNewTodo, addNewWorkspace }
