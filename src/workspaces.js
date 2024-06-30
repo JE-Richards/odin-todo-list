@@ -1,9 +1,8 @@
 class Workspace {
-    // a static array to contain all created workspaces
-    static #workspaceList = [];
 
     #name;
     #todoList;
+
     constructor (name) {
         if (!name || typeof name !== 'string') {
             throw new Error("Workspace name must be a non-empty string");
@@ -12,20 +11,7 @@ class Workspace {
         this.#name = name;
         this.#todoList = []
     }
-
-    static getWorkspaceList() {
-        return Workspace.#workspaceList;
-    }
-
-    static addToWorkspace(workspace) {
-        Workspace.#workspaceList.push(workspace);
-    }
-
-    static deleteWorkspace(workspace) {
-        let idx = Workspace.#workspaceList.findIndex(workspace);
-        Workspace.#workspaceList.splice(idx, 1);
-    }
-
+   
     get name() {
         return this.#name;
     }
@@ -50,4 +36,23 @@ class Workspace {
         let idx = this.#todoList.findIndex(todoTitle);
         this.#todoList.splice(idx, 1);
     }
+}
+
+class WorkspaceManager {
+    // a static array to contain all created workspaces
+    static #workspaceList = [];
+
+    static getWorkspaceList() {
+        return [...WorkspaceManager.#workspaceList];
+    }
+
+    static addToWorkspace(workspace) {
+        WorkspaceManager.#workspaceList.push(workspace);
+    }
+
+    static deleteWorkspace(workspaceName) {
+        let idx = WorkspaceManager.#workspaceList.findIndex(item => item.name === workspaceName);
+        WorkspaceManager.#workspaceList.splice(idx, 1);
+    }
+
 }
