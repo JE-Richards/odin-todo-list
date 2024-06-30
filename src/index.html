@@ -6,6 +6,49 @@
     <title></title>
 </head>
 <body>
-    
+    <form action="" id="newTodoForm">
+        <h1>New Task</h1>
+        <div id="newTodoTitleInput">
+            <label for="newTodoTitle">Title</label>
+            <input type="text" name="newTodoTitle" id="newTodoTitle" minlength="1" required>
+        </div>
+        <div id="newTodoDescInput">
+            <label for="newTodoDesc">Description <span class="optional">(optional)</span></label>
+            <input type="text" name="newTodoDesc" id="newTodoDesc">
+        </div>
+        <div id="newTodoDueDateInput">
+            <label for="newTodoDueDate">Due Date</label>
+            <input type="date" name="newTodoDueDate" id="newTodoDueDate" required>
+        </div>
+        <div id="newTodoPriorityInput">
+            <fieldset>
+                <legend>Priority</legend>
+
+                <label>
+                    Low
+                    <input type="radio" name="newTodoPriority" id="newTodoLowPriority" value="low">
+                </label>
+
+                <label>
+                    Medium
+                    <input type="radio" name="newTodoPriority" id="newTodoMedPriority" value="med">
+                </label>
+
+                <label>
+                    High
+                    <input type="radio" name="newTodoPriority" id="newTodoHighPriority" value="high">
+                </label>
+
+                <label>
+                    None
+                    <input type="radio" name="newTodoPriority" id="newTodoNoPriority" value="none" checked="checked">
+                </label>
+            </fieldset>
+            <div id="newTodoInputBtns">
+                <button type="submit" id="newTodoFormSubmit" form="newTodoForm">Add Task</button>
+                <button id="newTodoFormCancel">Cancel</button>
+            </div>
+        </div>
+    </form>
 </body>
 </html>

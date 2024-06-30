@@ -1,4 +1,4 @@
-import { isValid, format } from 'date-fns';
+import { isValid, format, parseISO } from 'date-fns';
 
 class Todo {
     #title;
@@ -11,13 +11,15 @@ class Todo {
             throw new Error("Title must be a non-empty string");
         }
 
-        if (isValid(dueDate) === false) {
+        const parsedDate = parseISO(dueDate);
+
+        if (isValid(parsedDate) === false) {
             throw new Error("Due date must be a valid date");
         }
 
         this.#title = title;
         this.#description = description;
-        this.#dueDate = format(dueDate, 'dd MMM yyyy');
+        this.#dueDate = format(parsedDate, 'dd MMM yyyy');
         this.#priority = priority;
     }
 
@@ -50,11 +52,13 @@ class Todo {
     }
 
     set dueDate(newDueDate) {
-        if (isValid(newDueDate) === false) {
+        let parsedDate = parseISO(newDueDate);
+
+        if (isValid(parsedDate) === false) {
             throw new Error("Due date must be a valid date");
         }
 
-        this.#dueDate = format(newDueDate, 'dd MMM yyyy');
+        this.#dueDate = format(parsedDate, 'dd MMM yyyy');
     }
 
     set priority(newPriority) {
