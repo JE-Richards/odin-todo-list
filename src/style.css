@@ -1,0 +1,163 @@
+/*---------------------------------*\
+|                                   |
+|           Theme Colours           |
+|                                   |
+\*---------------------------------*/
+:root {
+    --display-and-footer-background-col: #1e1e1e;
+    --sidebar-background-col: #262626;
+    --accent-col: #A88BFA;
+    --open-new-todo-btn-col: #dadada;
+    --open-new-todo-btn-hover: #aaa9a9;
+    --font-col: #dadada;
+    --footer-link-col: #A88BFA;
+    --footer-link-hover-col: #725ea8;
+    --footer-link-active-col: #5031a7;
+}
+
+/*---------------------------------*\
+|                                   |
+|           Custom  Fonts           |
+|                                   |
+\*---------------------------------*/
+@font-face {
+    font-family: 'ralewayregular';
+    src: url('./assets/fonts/raleway/raleway-regular-webfont.woff2') format('woff2'),
+         url('./assets/fonts/raleway/raleway-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'montserratregular';
+    src: url('./assets/fonts/montserrat/montserrat-regular-webfont.woff2') format('woff2'),
+         url('./assets/fonts/montserrat/montserrat-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/*---------------------------------*\
+|                                   |
+|        Multi-section Styles       |
+|                                   |
+\*---------------------------------*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'montserratregular', Helvetica, sans-serif;
+    color: var(--font-col);
+}
+
+body {
+    height: 100vh;
+    display:grid;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: 
+        "sidebar main"
+        "sidebar footer";
+    
+}
+
+.accent {
+    color: var(--accent-col);
+}
+
+#todoDisplay, footer {
+    background-color: var(--display-and-footer-background-col);
+}
+
+/*---------------------------------*\
+|                                   |
+|           Sidebar Styles          |
+|                                   |
+\*---------------------------------*/
+.sidebar {
+    display: flex;
+    flex-direction:column;
+    gap: 10px;
+    grid-area: sidebar;
+    padding: 30px 30px 15px;
+    background-color: var(--sidebar-background-col);
+}
+
+.sidebar > h1 {
+    font-size: 40px;
+}
+
+.sidebar hr {
+    border: none;
+    background-color: var(--accent-col);
+    height: 2px;
+}
+
+.sidebar button {
+    border: 2px solid;
+    border-radius: 8px;
+    font-weight: 1000;
+    font-size: 20px;
+    padding: 15px;
+}
+
+.sidebar #openNewWorkspaceDialog {
+    border-color: var(--accent-col);
+    background-color: var(--sidebar-background-col);
+}
+
+.sidebar #openNewWorkspaceDialog:hover {
+    background-color: var(--accent-col);
+    color: var(--sidebar-background-col);
+}
+
+.sidebar #openNewTodoDialog {
+    border-color: var(--open-new-todo-btn-col);
+    background-color: var(--open-new-todo-btn-col);
+    color: var(--sidebar-background-col);
+}
+
+.sidebar #openNewTodoDialog:hover {
+    border-color: var(--open-new-todo-btn-hover);
+    background-color: var(--open-new-todo-btn-hover);
+}
+
+
+/*---------------------------------*\
+|                                   |
+|        Main Content Styles        |
+|                                   |
+\*---------------------------------*/
+#todoDisplay {
+    grid-area: main;
+}
+
+/*---------------------------------*\
+|                                   |
+|           Footer Styles           |
+|                                   |
+\*---------------------------------*/
+footer {
+    grid-area: footer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--footer-link-col);
+}
+
+footer a:link {
+    color: var(--footer-link-col);
+}
+
+footer a:hover {
+    color: var(--footer-link-hover-col);
+}
+
+footer a:active {
+    color: var(--footer-link-active-col);
+}

@@ -4,62 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <form action="" id="newTodoForm">
-        <h1>New Todo</h1>
-        <div id="newTodoTitleInput">
-            <label for="newTodoTitle">Title</label>
-            <input type="text" name="newTodoTitle" id="newTodoTitle" minlength="1" required>
-        </div>
-        <div id="newTodoDescInput">
-            <label for="newTodoDesc">Description <span class="optional">(optional)</span></label>
-            <input type="text" name="newTodoDesc" id="newTodoDesc">
-        </div>
-        <div id="newTodoDueDateInput">
-            <label for="newTodoDueDate">Due Date</label>
-            <input type="date" name="newTodoDueDate" id="newTodoDueDate" required>
-        </div>
-        <div id="newTodoPriorityInput">
-            <fieldset>
-                <legend>Priority</legend>
+    <dialog id="newTodoDialog">
+        <form action="" id="newTodoForm">
+            <h1>New Todo</h1>
+            <div id="newTodoTitleInput">
+                <label for="newTodoTitle">Title</label>
+                <input type="text" name="newTodoTitle" id="newTodoTitle" minlength="1" required>
+            </div>
+            <div id="newTodoDescInput">
+                <label for="newTodoDesc">Description <span class="optional">(optional)</span></label>
+                <input type="text" name="newTodoDesc" id="newTodoDesc">
+            </div>
+            <div id="newTodoDueDateInput">
+                <label for="newTodoDueDate">Due Date</label>
+                <input type="date" name="newTodoDueDate" id="newTodoDueDate" required>
+            </div>
+            <div id="newTodoPriorityInput">
+                <fieldset>
+                    <legend>Priority</legend>
 
-                <label>
-                    Low
-                    <input type="radio" name="newTodoPriority" id="newTodoLowPriority" value="low">
-                </label>
+                    <label>
+                        Low
+                        <input type="radio" name="newTodoPriority" id="newTodoLowPriority" value="low">
+                    </label>
 
-                <label>
-                    Medium
-                    <input type="radio" name="newTodoPriority" id="newTodoMedPriority" value="med">
-                </label>
+                    <label>
+                        Medium
+                        <input type="radio" name="newTodoPriority" id="newTodoMedPriority" value="med">
+                    </label>
 
-                <label>
-                    High
-                    <input type="radio" name="newTodoPriority" id="newTodoHighPriority" value="high">
-                </label>
+                    <label>
+                        High
+                        <input type="radio" name="newTodoPriority" id="newTodoHighPriority" value="high">
+                    </label>
 
-                <label>
-                    None
-                    <input type="radio" name="newTodoPriority" id="newTodoNoPriority" value="none" checked="checked">
-                </label>
-            </fieldset>
-        </div>
-        <div id="newTodoInputBtns">
-            <button type="submit" id="newTodoFormSubmit" form="newTodoForm">Add Task</button>
-            <button id="newTodoFormCancel">Cancel</button>
-        </div>
-    </form>
-    <form action="" id="newWorkspaceForm">
-        <h1>New Workspace</h1>
-        <div id="newWorkspaceNameInput">
-            <label for="newWorkspaceName">Name</label>
-            <input type="text" name="newWorkspaceName" id="newWorkspaceName" minlength="1" required>
-        </div>
-        <div id="newWorkspaceInputBtns">
-            <button type="submit" id="newWorkspaceFormSubmit" form="newWorkspaceForm">Create Workspace</button>
-            <button id="newTodoFormCancel">Cancel</button>
-        </div>
-    </form>
+                    <label>
+                        None
+                        <input type="radio" name="newTodoPriority" id="newTodoNoPriority" value="none" checked="checked">
+                    </label>
+                </fieldset>
+            </div>
+            <div id="newTodoInputBtns">
+                <button type="submit" id="newTodoFormSubmit" form="newTodoForm">Add Task</button>
+                <button id="newTodoFormCancel">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog id="newWorkspaceDialog">
+        <form action="" id="newWorkspaceForm">
+            <h1>New Workspace</h1>
+            <div id="newWorkspaceNameInput">
+                <label for="newWorkspaceName">Name</label>
+                <input type="text" name="newWorkspaceName" id="newWorkspaceName" minlength="1" required>
+            </div>
+            <div id="newWorkspaceInputBtns">
+                <button type="submit" id="newWorkspaceFormSubmit" form="newWorkspaceForm">Create Workspace</button>
+                <button id="newTodoFormCancel">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    <aside class="sidebar">
+        <h1 class="appTitle"><span class="accent">.</span>Workspaces</h1>
+        <hr>
+        <button type="button" id="openNewWorkspaceDialog" class="accent">+ New Workspace</button>
+        <button type="button" id="openNewTodoDialog">+ New To-Do</button>
+        <nav id="workspacesNav"></nav>
+    </aside>
+    <div id="todoDisplay">
+
+    </div>
+    <footer>
+        <p>Created by&nbsp;<a href="https://github.com/JE-Richards">JE Richards</a></p>
+    </footer>
 </body>
 </html>
