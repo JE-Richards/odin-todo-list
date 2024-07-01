@@ -41,6 +41,7 @@ class Workspace {
 class WorkspaceManager {
     // a static array to contain all created workspaces
     static #workspaceList = [];
+    static currentWorkspace = null;
 
     static getWorkspaceList() {
         return [...WorkspaceManager.#workspaceList];
@@ -53,6 +54,17 @@ class WorkspaceManager {
     static deleteWorkspace(workspaceName) {
         let idx = WorkspaceManager.#workspaceList.findIndex(item => item.name === workspaceName);
         WorkspaceManager.#workspaceList.splice(idx, 1);
+    }
+
+    static setCurrentWorkspace(workspaceName) {
+        let idx = WorkspaceManager.#workspaceList.findIndex(item => item.name === workspaceName);
+
+        if (idx !== -1) {
+            WorkspaceManager.currentWorkspace = WorkspaceManager.#workspaceList[idx];
+        }
+        else {
+            throw new Error("Workspace not found");
+        }
     }
 
 }

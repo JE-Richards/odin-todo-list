@@ -17,12 +17,15 @@ function addNewTodo() {
             priority = newTodoPriorityRadios[i].value;
         }
     }
+
+    WorkspaceManager.currentWorkspace.addNewTodo(new Todo(title, desc, dueDate, priority));
 }
 
 function addNewWorkspace() {
     const name = document.getElementById('newWorkspaceName').value;
 
     WorkspaceManager.addToWorkspace(new Workspace(name));
+    WorkspaceManager.setCurrentWorkspace(name);
 }
 
 export { cancelBtn, addNewTodo, addNewWorkspace }
