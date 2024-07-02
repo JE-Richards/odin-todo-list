@@ -1,11 +1,16 @@
 import { Todo } from './todo.js';
 import { Workspace, WorkspaceManager } from './workspaces.js';
 
-function cancelBtn() {
+function cancelForm(event) {
+    const btn = event.target;
+    const form = btn.closest('form');
+    const dialog = btn.closest('dialog');
+
+    form.reset();
     dialog.close();
 }
 
-function addNewTodo() {
+function newTodoSubmit() {
     const title = document.getElementById('newTodoTitle').value;
     const desc = document.getElementById('newTodoDesc').value;
     const dueDate = document.getElementById('newTodoDueDate').value;
@@ -21,11 +26,22 @@ function addNewTodo() {
     WorkspaceManager.currentWorkspace.addNewTodo(new Todo(title, desc, dueDate, priority));
 }
 
-function addNewWorkspace() {
+function newWorkspaceSubmit() {
     const name = document.getElementById('newWorkspaceName').value;
 
     WorkspaceManager.addToWorkspace(new Workspace(name));
     WorkspaceManager.setCurrentWorkspace(name);
 }
 
-export { cancelBtn, addNewTodo, addNewWorkspace }
+// function openNewWorkspaceDialog() {
+//     const newWorkspaceDialog = document.getElementById('newWorkspaceDialog');
+//     newWorkspaceDialog.showModal();
+// }
+
+// key: value pair takes the form of (dialog[id]: corresponding function)
+const formSubmitFunctions = {
+    newTodoForm: newTodoSubmit,
+    newWorkspaceForm: newWorkspaceSubmit,
+};
+
+export { cancelForm, formSubmitFunctions }

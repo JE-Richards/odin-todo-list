@@ -101,23 +101,23 @@ body {
     padding: 15px;
 }
 
-.sidebar #openNewWorkspaceDialog {
+.sidebar #newWorkspaceDialogOpen {
     border-color: var(--accent-col);
     background-color: var(--sidebar-background-col);
 }
 
-.sidebar #openNewWorkspaceDialog:hover {
+.sidebar #newWorkspaceDialogOpen:hover {
     background-color: var(--accent-col);
     color: var(--sidebar-background-col);
 }
 
-.sidebar #openNewTodoDialog {
+.sidebar #newTodoDialogOpen {
     border-color: var(--open-new-todo-btn-col);
     background-color: var(--open-new-todo-btn-col);
     color: var(--sidebar-background-col);
 }
 
-.sidebar #openNewTodoDialog:hover {
+.sidebar #newTodoDialogOpen:hover {
     border-color: var(--open-new-todo-btn-hover);
     background-color: var(--open-new-todo-btn-hover);
 }
