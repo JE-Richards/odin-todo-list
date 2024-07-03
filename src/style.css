@@ -65,7 +65,7 @@ body {
     color: var(--accent-col);
 }
 
-#todoDisplay, footer {
+#workspaceDisplay, footer {
     background-color: var(--display-and-footer-background-col);
 }
 
@@ -93,7 +93,7 @@ body {
     height: 2px;
 }
 
-.sidebar button {
+.sidebar #newWorkspaceDialogOpen, .sidebar #newTodoDialogOpen  {
     border: 2px solid;
     border-radius: 8px;
     font-weight: 1000;
@@ -128,7 +128,7 @@ body {
 |        Main Content Styles        |
 |                                   |
 \*---------------------------------*/
-#todoDisplay {
+#workspaceDisplay {
     grid-area: main;
 }
 

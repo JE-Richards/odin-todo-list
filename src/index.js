@@ -1,6 +1,8 @@
 import './style.css';
 import { cancelForm, formSubmitFunctions } from "./components/button-fuctions";
 import { Workspace, WorkspaceManager } from './components/workspaces.js';
+import { renderWorkspacesNav, addNavEventListeners } from './components/sidebar-controller.js';
+import { Todo } from './components/todo.js';
 
 const formCancelButtons = document.querySelectorAll('.cancel');
 const openDialogButtons = document.querySelectorAll('.openDialog');
@@ -31,6 +33,30 @@ dialogs.forEach(dialog => {
         dialog.close();
     })
 })
+
+// create a default workspace and render all workspaces
+function createInboxWorkspace() {
+    WorkspaceManager.addToWorkspace(
+        new Workspace('Inbox')
+    );
+
+    WorkspaceManager.setCurrentWorkspace('Inbox');
+    WorkspaceManager.currentWorkspace.addNewTodo(
+        new Todo(
+            'Title Test',
+            'Description Test',
+            "2024-07-22",
+            'none'
+        )
+    )
+
+    renderWorkspacesNav(WorkspaceManager.getWorkspaceList());
+}
+createInboxWorkspace();
+addNavEventListeners(
+    WorkspaceManager.currentWorkspace,
+    WorkspaceManager.currentWorkspace.getTodoList()
+);
 
 // temporary inclusion for testing purposes
 window.WorkspaceManager = WorkspaceManager;

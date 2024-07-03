@@ -33,11 +33,6 @@ function newWorkspaceSubmit() {
     WorkspaceManager.setCurrentWorkspace(name);
 }
 
-// function openNewWorkspaceDialog() {
-//     const newWorkspaceDialog = document.getElementById('newWorkspaceDialog');
-//     newWorkspaceDialog.showModal();
-// }
-
 // key: value pair takes the form of (dialog[id]: corresponding function)
 const formSubmitFunctions = {
     newTodoForm: newTodoSubmit,
