@@ -60,3 +60,4 @@ addNavEventListeners(
 
 // temporary inclusion for testing purposes
 window.WorkspaceManager = WorkspaceManager;
+window.Todo = Todo;

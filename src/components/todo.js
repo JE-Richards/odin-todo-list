@@ -5,6 +5,7 @@ class Todo {
     #description;
     #dueDate;
     #priority;
+    #isComplete;
 
     constructor (title, description, dueDate, priority) {
         if (!title || typeof title !== 'string') {
@@ -21,6 +22,7 @@ class Todo {
         this.#description = description;
         this.#dueDate = format(parsedDate, 'dd MMM yyyy');
         this.#priority = priority;
+        this.#isComplete = false;
     }
 
     get title() {
@@ -37,6 +39,10 @@ class Todo {
 
     get priority() {
         return this.#priority;
+    }
+
+    get isComplete() {
+        return this.#isComplete;
     }
 
     set title(newTitle) {
@@ -63,6 +69,14 @@ class Todo {
 
     set priority(newPriority) {
         this.#priority = newPriority;
+    }
+
+    set isComplete(newStatus) {
+        this.#isComplete = newStatus;
+    }
+
+    static toggleComplete(todo) {
+        (todo.isComplete === false) ? (todo.isComplete = true) : (todo.isComplete = false);
     }
 }
 
