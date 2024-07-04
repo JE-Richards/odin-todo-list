@@ -1,11 +1,11 @@
 import './style.css';
-import { cancelForm, formSubmitFunctions } from "./components/button-fuctions";
+import { cancelForm, newFormSubmitFunctions } from "./components/button-fuctions";
 import { Workspace, WorkspaceManager } from './components/workspaces.js';
 import { renderWorkspacesNav, addNavEventListeners } from './components/sidebar-controller.js';
 import { Todo } from './components/todo.js';
 
 const formCancelButtons = document.querySelectorAll('.cancel');
-const openDialogButtons = document.querySelectorAll('.openDialog');
+const openNewDialogButtons = document.querySelectorAll('.openNewDialog');
 const dialogs = document.querySelectorAll('dialog');
 
 // add event listeners to each cancel button
@@ -14,7 +14,7 @@ formCancelButtons.forEach(button => {
 });
 
 // add event listeners to each open dialog button
-openDialogButtons.forEach(button => {
+openNewDialogButtons.forEach(button => {
     const dialogId = button.id.replace('Open', '');
     const dialog = document.getElementById(dialogId);
 
@@ -28,7 +28,7 @@ dialogs.forEach(dialog => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         const formId = form.getAttribute('id');
-        formSubmitFunctions[formId]();
+        newFormSubmitFunctions[formId]();
         form.reset();
         dialog.close();
     })

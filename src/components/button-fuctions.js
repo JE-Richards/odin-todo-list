@@ -1,5 +1,6 @@
 import { Todo } from './todo.js';
 import { Workspace, WorkspaceManager } from './workspaces.js';
+import { renderWorkspacesNav, populateWorkspaceDisplay, highlightCurrentWorkspaceNav } from './sidebar-controller.js';
 
 function cancelForm(event) {
     const btn = event.target;
@@ -33,10 +34,33 @@ function newWorkspaceSubmit() {
     WorkspaceManager.setCurrentWorkspace(name);
 }
 
+function editWorkspaceSubmit() {
+    // get needed values for edit
+    const editedName = document.getElementById('editWorkspaceName').value;
+    const workspaceName = document.getElementById('workspaceIdForEdit').value;
+
+    // run the edit function
+    WorkspaceManager.editWorkspace(workspaceName, editedName);
+
+    // make the edited workspace the current workspace to make populating the workspace display easier
+    WorkspaceManager.setCurrentWorkspace(editedName);
+
+    // render the updated workspace nav and apply the correct highlighting
+    renderWorkspacesNav(WorkspaceManager.getWorkspaceList());
+    highlightCurrentWorkspaceNav();
+    
+    // Populate the workspace display making the edited workspace the active workspace
+    populateWorkspaceDisplay(
+        WorkspaceManager.currentWorkspace,
+        WorkspaceManager.currentWorkspace.getTodoList()
+    );
+}
+
 // key: value pair takes the form of (dialog[id]: corresponding function)
-const formSubmitFunctions = {
+const newFormSubmitFunctions = {
     newTodoForm: newTodoSubmit,
     newWorkspaceForm: newWorkspaceSubmit,
+    editWorkspaceForm: editWorkspaceSubmit,
 };
 
-export { cancelForm, formSubmitFunctions }
+export { cancelForm, newFormSubmitFunctions }

@@ -6,6 +6,7 @@
     <title></title>
 </head>
 <body>
+    <!-- DIALOGS -->
     <dialog id="newTodoDialog">
         <form action="" id="newTodoForm">
             <h1>New Todo</h1>
@@ -65,11 +66,27 @@
             </div>
         </form>
     </dialog>
+    <dialog id="editWorkspaceDialog">
+        <form action="" id="editWorkspaceForm">
+            <h1>Edit Workspace</h1>
+            <!-- hidden input to store the id of the workspace being edited -->
+            <input type="hidden" name="workspaceIdForEdit" id="workspaceIdForEdit">
+            <div id="editWorkspaceNameInput">
+                <label for="editWorkspaceName">Name</label>
+                <input type="text" name="editWorkspaceName" id="editWorkspaceName" minlength="1" required>
+            </div>
+            <div id="editWorkspaceInputBtns">
+                <button type="submit" id="editWorkspaceFormSubmit" form="editWorkspaceForm" class="formSubmit">Confirm Changes</button>></button>
+                <button type="button" id="editWorkspaceFormCancel" class="cancel">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    <!-- REST OF PAGE -->
     <aside class="sidebar">
         <h1 class="appTitle"><span class="accent">.</span>Workspaces</h1>
         <hr>
-        <button type="button" id="newWorkspaceDialogOpen" class="accent openDialog">+ New Workspace</button>
-        <button type="button" id="newTodoDialogOpen" class="openDialog">+ New To-Do</button>
+        <button type="button" id="newWorkspaceDialogOpen" class="accent openNewDialog">+ New Workspace</button>
+        <button type="button" id="newTodoDialogOpen" class="openNewDialog">+ New To-Do</button>
         <nav id="workspacesNav"></nav>
     </aside>
     <div id="workspaceDisplay">

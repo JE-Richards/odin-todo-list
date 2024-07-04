@@ -56,6 +56,12 @@ class WorkspaceManager {
         WorkspaceManager.#workspaceList.splice(idx, 1);
     }
 
+    static editWorkspace(workspaceName, editedName) {
+        let idx = WorkspaceManager.#workspaceList.findIndex(item => item.name === workspaceName);
+        
+        WorkspaceManager.#workspaceList[idx].name = editedName;
+    }
+
     static setCurrentWorkspace(workspaceName) {
         let idx = WorkspaceManager.#workspaceList.findIndex(item => item.name === workspaceName);
 
