@@ -31,7 +31,7 @@ function addNavEventListeners(workspace, workspaceTodoList) {
 
     navButtons.forEach(button => {
         button.addEventListener('click', () => {
-            highlightCurrentWorkspaceNav();
+            highlightCurrentWorkspaceNav(button.getAttribute('id'));
             populateWorkspaceDisplay(workspace, workspaceTodoList);
         })
 
@@ -53,4 +53,11 @@ function addNavEventListeners(workspace, workspaceTodoList) {
     })
 }
 
-export { renderWorkspacesNav, addNavEventListeners, highlightCurrentWorkspaceNav }
+// Combine render, highlight, and add event listener to reduce code elsewhere
+function navRefresh(allWorkspacesArray, currentWorkspaceName, currentWorkspaceInstance, currentWorkspaceTodoList ) {
+    renderWorkspacesNav(allWorkspacesArray);
+    highlightCurrentWorkspaceNav(currentWorkspaceName);
+    addNavEventListeners(currentWorkspaceInstance, currentWorkspaceTodoList)
+}
+
+export { renderWorkspacesNav, addNavEventListeners, highlightCurrentWorkspaceNav, navRefresh }

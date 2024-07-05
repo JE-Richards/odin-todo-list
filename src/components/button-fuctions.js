@@ -1,6 +1,6 @@
 import { Todo } from './todo.js';
 import { Workspace, WorkspaceManager } from './workspaces.js';
-import { renderWorkspacesNav, highlightCurrentWorkspaceNav, addNavEventListeners } from './sidebar-controller.js';
+import { renderWorkspacesNav, highlightCurrentWorkspaceNav, addNavEventListeners, navRefresh } from './sidebar-controller.js';
 import { populateWorkspaceDisplay } from './workspace-display-controller.js';
 
 function cancelForm(event) {
@@ -34,9 +34,12 @@ function newWorkspaceSubmit() {
 
     WorkspaceManager.addToWorkspace(new Workspace(name));
     WorkspaceManager.setCurrentWorkspace(name);
-    renderWorkspacesNav(WorkspaceManager.getWorkspaceList());
-    highlightCurrentWorkspaceNav();
-    addNavEventListeners(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+    navRefresh(
+        WorkspaceManager.getWorkspaceList(),
+        name,
+        WorkspaceManager.currentWorkspace,
+        WorkspaceManager.currentWorkspace.getTodoList()
+    );
     populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
 }
 
@@ -51,9 +54,13 @@ function editWorkspaceSubmit() {
     // make the edited workspace the current workspace to make populating the workspace display easier
     WorkspaceManager.setCurrentWorkspace(editedName);
 
-    // render the updated workspace nav and apply the correct highlighting
-    renderWorkspacesNav(WorkspaceManager.getWorkspaceList());
-    highlightCurrentWorkspaceNav();
+    // refresh nav
+    navRefresh(
+        WorkspaceManager.getWorkspaceList(),
+        editedName,
+        WorkspaceManager.currentWorkspace,
+        WorkspaceManager.currentWorkspace.getTodoList()
+    )
     
     // Populate the workspace display making the edited workspace the active workspace
     populateWorkspaceDisplay(
@@ -74,15 +81,20 @@ function editWorkspaceDelete(event) {
 
         if (userConfirm) {
             WorkspaceManager.deleteWorkspace(workspaceName);
-            dialog.close();
-            renderWorkspacesNav(WorkspaceManager.getWorkspaceList());
-            addNavEventListeners(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
 
+            // if deleting currently selected workspace, set current workspace to inbox for display refresh
             if (WorkspaceManager.currentWorkspace.name === workspaceName) {
                 WorkspaceManager.setCurrentWorkspace('Inbox');
-                highlightCurrentWorkspaceNav();
-                populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
             }
+
+            navRefresh(
+                WorkspaceManager.getWorkspaceList(),
+                WorkspaceManager.currentWorkspace.name,
+                WorkspaceManager.currentWorkspace,
+                WorkspaceManager.currentWorkspace.getTodoList()
+            )
+
+            dialog.close();
         }
     }
 }

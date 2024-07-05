@@ -1,7 +1,7 @@
 import './style.css';
 import { cancelForm, formSubmitFunctions, editWorkspaceDelete } from "./components/button-fuctions";
 import { Workspace, WorkspaceManager } from './components/workspaces.js';
-import { renderWorkspacesNav, addNavEventListeners } from './components/sidebar-controller.js';
+import { renderWorkspacesNav, addNavEventListeners, navRefresh } from './components/sidebar-controller.js';
 import { Todo } from './components/todo.js';
 import { populateWorkspaceDisplay } from './components/workspace-display-controller.js';
 
@@ -58,14 +58,18 @@ function createInboxWorkspace() {
         )
     )
 
-    renderWorkspacesNav(WorkspaceManager.getWorkspaceList());
-    populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList())
+    navRefresh(
+        WorkspaceManager.getWorkspaceList(),
+        WorkspaceManager.currentWorkspace.name,
+        WorkspaceManager.currentWorkspace,
+        WorkspaceManager.currentWorkspace.getTodoList()
+    )
+    populateWorkspaceDisplay(
+        WorkspaceManager.currentWorkspace,
+        WorkspaceManager.currentWorkspace.getTodoList()
+    )
 }
 createInboxWorkspace();
-addNavEventListeners(
-    WorkspaceManager.currentWorkspace,
-    WorkspaceManager.currentWorkspace.getTodoList()
-);
 
 // temporary inclusion for testing purposes
 window.WorkspaceManager = WorkspaceManager;
