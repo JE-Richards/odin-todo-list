@@ -2,6 +2,7 @@ class Workspace {
 
     #name;
     #todoList;
+    #isEditable;
 
     constructor (name) {
         if (!name || typeof name !== 'string') {
@@ -10,10 +11,15 @@ class Workspace {
 
         this.#name = name;
         this.#todoList = []
+        this.#isEditable = Boolean(true);
     }
    
     get name() {
         return this.#name;
+    }
+
+    get isEditable() {
+        return this.#isEditable;
     }
 
     set name(newName) {
@@ -22,6 +28,14 @@ class Workspace {
         }
 
         this.#name = newName;
+    }
+
+    set isEditable(newStatus) {
+        if (typeof newStatus !== 'boolean') {
+            throw new Error("Workspace.isEditable must be a Boolean")
+        }
+
+        this.#isEditable = Boolean(newStatus);
     }
 
     getTodoList() {

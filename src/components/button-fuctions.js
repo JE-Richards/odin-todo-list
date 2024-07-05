@@ -1,6 +1,7 @@
 import { Todo } from './todo.js';
 import { Workspace, WorkspaceManager } from './workspaces.js';
-import { renderWorkspacesNav, populateWorkspaceDisplay, highlightCurrentWorkspaceNav } from './sidebar-controller.js';
+import { renderWorkspacesNav, highlightCurrentWorkspaceNav, addNavEventListeners } from './sidebar-controller.js';
+import { populateWorkspaceDisplay } from './workspace-display-controller.js';
 
 function cancelForm(event) {
     const btn = event.target;
@@ -25,6 +26,7 @@ function newTodoSubmit() {
     }
 
     WorkspaceManager.currentWorkspace.addNewTodo(new Todo(title, desc, dueDate, priority));
+    populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
 }
 
 function newWorkspaceSubmit() {
@@ -32,6 +34,10 @@ function newWorkspaceSubmit() {
 
     WorkspaceManager.addToWorkspace(new Workspace(name));
     WorkspaceManager.setCurrentWorkspace(name);
+    renderWorkspacesNav(WorkspaceManager.getWorkspaceList());
+    highlightCurrentWorkspaceNav();
+    addNavEventListeners(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+    populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
 }
 
 function editWorkspaceSubmit() {
@@ -56,11 +62,36 @@ function editWorkspaceSubmit() {
     );
 }
 
+function editWorkspaceDelete(event) {
+    const btn = event.target;
+    const dialog = btn.closest('dialog');
+    const workspaceName = document.getElementById('workspaceIdForEdit').value;
+    const idx = WorkspaceManager.getWorkspaceList().findIndex(item => item.name === workspaceName);
+    const workspaceIsEditable = WorkspaceManager.getWorkspaceList()[idx].isEditable;
+
+    if (workspaceIsEditable) {
+        const userConfirm = confirm(`Are you sure you want to delete the ${workspaceName} workspace?`);
+
+        if (userConfirm) {
+            WorkspaceManager.deleteWorkspace(workspaceName);
+            dialog.close();
+            renderWorkspacesNav(WorkspaceManager.getWorkspaceList());
+            addNavEventListeners(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+
+            if (WorkspaceManager.currentWorkspace.name === workspaceName) {
+                WorkspaceManager.setCurrentWorkspace('Inbox');
+                highlightCurrentWorkspaceNav();
+                populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+            }
+        }
+    }
+}
+
 // key: value pair takes the form of (dialog[id]: corresponding function)
-const newFormSubmitFunctions = {
+const formSubmitFunctions = {
     newTodoForm: newTodoSubmit,
     newWorkspaceForm: newWorkspaceSubmit,
     editWorkspaceForm: editWorkspaceSubmit,
 };
 
-export { cancelForm, newFormSubmitFunctions }
+export { cancelForm, formSubmitFunctions, editWorkspaceDelete }
