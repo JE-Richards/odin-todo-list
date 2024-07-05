@@ -29,6 +29,33 @@ function newTodoSubmit() {
     populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
 }
 
+function editTodoSubmit() {
+    const title = document.getElementById('editTodoTitle').value;
+    const desc = document.getElementById('editTodoDesc').value;
+    const dueDate = document.getElementById('editTodoDueDate').value;
+    let priority = null;
+
+    const editTodoPriorityRadios = document.getElementsByName('editTodoPriority');
+    for (let i=0; i < editTodoPriorityRadios.length; i++) {
+        if (editTodoPriorityRadios[i].checked) {
+            priority = editTodoPriorityRadios[i].value;
+        }
+    }
+
+    // Select the todo object
+    const todoId = document.getElementById('todoIdForEdit').value;
+    let idx = WorkspaceManager.currentWorkspace.getTodoList().findIndex(item => item.title === todoId);
+    let todo = WorkspaceManager.currentWorkspace.getTododList()[idx];
+
+    // edit the todo
+    todo.title = title;
+    todo.description = desc;
+    todo.dueDate = dueDate;
+    todo.priority = priority;
+
+    populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+}
+
 function newWorkspaceSubmit() {
     const name = document.getElementById('newWorkspaceName').value;
 
@@ -102,8 +129,9 @@ function editWorkspaceDelete(event) {
 // key: value pair takes the form of (dialog[id]: corresponding function)
 const formSubmitFunctions = {
     newTodoForm: newTodoSubmit,
+    editTodoForm: editTodoSubmit,
     newWorkspaceForm: newWorkspaceSubmit,
     editWorkspaceForm: editWorkspaceSubmit,
 };
 
-export { cancelForm, formSubmitFunctions, editWorkspaceDelete }
+export { cancelForm, formSubmitFunctions, editWorkspaceDelete, editTodoSubmit }

@@ -53,6 +53,54 @@
             </div>
         </form>
     </dialog>
+    <dialog id="editTodoDialog">
+        <form action="" id="editTodoForm">
+            <h1></h1>
+            <!-- hidden input to store the id of the todo being edited -->
+            <input type="hidden" name="todoIdForEdit" id="todoIdForEdit">
+            <div id="editTodoTitleInput">
+                <label for="editTodoTitle">Title</label>
+                <input type="text" name="editTodoTitle" id="editTodoTitle" minlength="1" required>
+            </div>
+            <div id="editTodoDescInput">
+                <label for="editTodoDesc">Description <span class="optional">(optional)</span></label>
+                <input type="text" name="editTodoDesc" id="editTodoDesc">
+            </div>
+            <div id="editTodoDueDateInput">
+                <label for="editTodoDueDate">Due Date</label>
+                <input type="date" name="editTodoDueDate" id="editTodoDueDate" required>
+            </div>
+            <div id="editTodoPriorityInput">
+                <fieldset>
+                    <legend>Priority</legend>
+
+                    <label>
+                        Low
+                        <input type="radio" name="editTodoPriority" id="editTodoLowPriority" value="low">
+                    </label>
+
+                    <label>
+                        Medium
+                        <input type="radio" name="editTodoPriority" id="editTodoMedPriority" value="med">
+                    </label>
+
+                    <label>
+                        High
+                        <input type="radio" name="editTodoPriority" id="editTodoHighPriority" value="high">
+                    </label>
+
+                    <label>
+                        None
+                        <input type="radio" name="editTodoPriority" id="editTodoNoPriority" value="none">
+                    </label>
+                </fieldset>
+            </div>
+            <div id="editTodoInputBtns">
+                <button type="submit" id="editTodoFormSubmit" form="editTodoForm" class="formSubmit">Add Task</button>
+                <button type="button" id="editTodoFormCancel" class="cancel">Cancel</button>
+            </div>
+        </form>
+    </dialog>
     <dialog id="newWorkspaceDialog">
         <form action="" id="newWorkspaceForm">
             <h1>New Workspace</h1>
