@@ -47,7 +47,7 @@ class Workspace {
     }
 
     deleteTodo(todoTitle) {
-        let idx = this.#todoList.findIndex(todoTitle);
+        let idx = this.#todoList.findIndex(item => item.title === todoTitle);
         this.#todoList.splice(idx, 1);
     }
 }

@@ -48,7 +48,7 @@
                 </fieldset>
             </div>
             <div id="newTodoInputBtns">
-                <button type="submit" id="newTodoFormSubmit" form="newTodoForm" class="formSubmit">Add Task</button>
+                <button type="submit" id="newTodoFormSubmit" form="newTodoForm" class="formSubmit">Add To-do</button>
                 <button type="button" id="newTodoFormCancel" class="cancel">Cancel</button>
             </div>
         </form>
@@ -96,8 +96,28 @@
                 </fieldset>
             </div>
             <div id="editTodoInputBtns">
-                <button type="submit" id="editTodoFormSubmit" form="editTodoForm" class="formSubmit">Add Task</button>
+                <button type="submit" id="editTodoFormSubmit" form="editTodoForm" class="formSubmit">Submit Changes</button>
                 <button type="button" id="editTodoFormCancel" class="cancel">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog id="moveTodoDialog">
+        <form action="" id="moveTodoForm">
+            <!-- hidden input to store the id of the todo being moved -->
+            <input type="hidden" name="todoIdForMove" id="todoIdForMove">
+            <div id="currentWorkspaceNameInput">
+                <label for="currentWorkspaceName">From</label>
+                <input type="text" name="currentWorkspaceName" id="currentWorkspaceName" minlength="1" disabled>
+            </div>
+            <div id="moveToWorkspaceNameInput">
+                <label for="moveToWorkspaceName">To</label>
+                <select name="moveToWorkspaceName" id="moveToWorkspaceName">
+                    
+                </select>
+            </div>
+            <div id="moveTodoInputBtns">
+                <button type="submit" id="moveTodoFormSubmit" form="moveTodoForm" class="formSubmit">Move To-do</button>
+                <button type="button" id="moveTodoFormCancel" class="cancel">Cancel</button>
             </div>
         </form>
     </dialog>

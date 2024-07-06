@@ -56,6 +56,36 @@ function editTodoSubmit() {
     populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
 }
 
+function moveTodoSubmit() {
+    // get workspace todo is currently in
+    const todoCurrentWorkspace = document.getElementById('currentWorkspaceName').value;
+
+    // get the new workplace to store the todo in
+    const todoNewWorkspace = document.getElementById('moveToWorkspaceName').value;
+
+    // get the todo title
+    const todoTitle = document.getElementById('todoIdForMove').value;
+
+    // find the respective indices of the workspaces
+    const todoCurrentWorkspaceIdx = WorkspaceManager.getWorkspaceList().findIndex(item => item.name === todoCurrentWorkspace);
+    const todoNewWorkspaceIdx = WorkspaceManager.getWorkspaceList().findIndex(item => item.name === todoNewWorkspace);
+
+    // get the workspace to-do lists
+    const currentWorkspacePreMove = WorkspaceManager.getWorkspaceList()[todoCurrentWorkspaceIdx];
+    const currentWorkspaceTodoList = currentWorkspacePreMove.getTodoList();
+    const newWorkspaceForMove = WorkspaceManager.getWorkspaceList()[todoNewWorkspaceIdx];
+
+    // find the todo index in current list
+    const todoIdx = currentWorkspaceTodoList.findIndex(item => item.title === todoTitle);
+
+    // move the todo
+    let todo = currentWorkspaceTodoList.splice(todoIdx, 1);
+    newWorkspaceForMove.addNewTodo(...todo);
+
+    // refresh display
+    populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+}
+
 function newWorkspaceSubmit() {
     const name = document.getElementById('newWorkspaceName').value;
 
@@ -63,9 +93,7 @@ function newWorkspaceSubmit() {
     WorkspaceManager.setCurrentWorkspace(name);
     navRefresh(
         WorkspaceManager.getWorkspaceList(),
-        name,
-        WorkspaceManager.currentWorkspace,
-        WorkspaceManager.currentWorkspace.getTodoList()
+        name
     );
     populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
 }
@@ -84,9 +112,7 @@ function editWorkspaceSubmit() {
     // refresh nav
     navRefresh(
         WorkspaceManager.getWorkspaceList(),
-        editedName,
-        WorkspaceManager.currentWorkspace,
-        WorkspaceManager.currentWorkspace.getTodoList()
+        editedName
     )
     
     // Populate the workspace display making the edited workspace the active workspace
@@ -116,9 +142,7 @@ function editWorkspaceDelete(event) {
 
             navRefresh(
                 WorkspaceManager.getWorkspaceList(),
-                WorkspaceManager.currentWorkspace.name,
-                WorkspaceManager.currentWorkspace,
-                WorkspaceManager.currentWorkspace.getTodoList()
+                WorkspaceManager.currentWorkspace.name
             )
 
             dialog.close();
@@ -132,6 +156,7 @@ const formSubmitFunctions = {
     editTodoForm: editTodoSubmit,
     newWorkspaceForm: newWorkspaceSubmit,
     editWorkspaceForm: editWorkspaceSubmit,
+    moveTodoForm: moveTodoSubmit
 };
 
 export { cancelForm, formSubmitFunctions, editWorkspaceDelete, editTodoSubmit }

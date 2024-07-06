@@ -60,9 +60,7 @@ function createInboxWorkspace() {
 
     navRefresh(
         WorkspaceManager.getWorkspaceList(),
-        WorkspaceManager.currentWorkspace.name,
-        WorkspaceManager.currentWorkspace,
-        WorkspaceManager.currentWorkspace.getTodoList()
+        WorkspaceManager.currentWorkspace.name
     )
     populateWorkspaceDisplay(
         WorkspaceManager.currentWorkspace,

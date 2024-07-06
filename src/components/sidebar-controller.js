@@ -1,5 +1,6 @@
 import { populateWorkspaceDisplay } from "./workspace-display-controller";
 import { prepopulateWorkspaceEdit } from "./prepopulate-edit-forms";
+import { WorkspaceManager } from "./workspaces";
 
 function renderWorkspacesNav(array) {
     const nav = document.getElementById('workspacesNav');
@@ -26,13 +27,14 @@ function highlightCurrentWorkspaceNav(buttonId) {
     })
 }
 
-function addNavEventListeners(workspace, workspaceTodoList) {
+function addNavEventListeners() {
     const navButtons = document.querySelectorAll('.sidebar nav button');
 
     navButtons.forEach(button => {
         button.addEventListener('click', () => {
+            WorkspaceManager.setCurrentWorkspace(button.getAttribute('id'));
             highlightCurrentWorkspaceNav(button.getAttribute('id'));
-            populateWorkspaceDisplay(workspace, workspaceTodoList);
+            populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
         })
 
         const editSpan = button.querySelector('span.editButton');
@@ -45,7 +47,7 @@ function addNavEventListeners(workspace, workspaceTodoList) {
                 // Need the form to store a hidden input value which can be referenced to access the correct
                 // workspace when submitting the edit
                 document.getElementById('workspaceIdForEdit').value = editSpan.parentElement.id;
-                prepopulateWorkspaceEdit(workspace);
+                prepopulateWorkspaceEdit(WorkspaceManager.currentWorkspace);
                 const dialog = document.getElementById('editWorkspaceDialog');
                 dialog.showModal();
             } )
@@ -54,10 +56,10 @@ function addNavEventListeners(workspace, workspaceTodoList) {
 }
 
 // Combine render, highlight, and add event listener to reduce code elsewhere
-function navRefresh(allWorkspacesArray, currentWorkspaceName, currentWorkspaceInstance, currentWorkspaceTodoList ) {
+function navRefresh(allWorkspacesArray, currentWorkspaceName) {
     renderWorkspacesNav(allWorkspacesArray);
     highlightCurrentWorkspaceNav(currentWorkspaceName);
-    addNavEventListeners(currentWorkspaceInstance, currentWorkspaceTodoList)
+    addNavEventListeners()
 }
 
 export { renderWorkspacesNav, addNavEventListeners, highlightCurrentWorkspaceNav, navRefresh }
