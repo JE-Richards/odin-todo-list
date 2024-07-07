@@ -1,12 +1,11 @@
 import './style.css';
 import { cancelForm, formSubmitFunctions, editWorkspaceDelete } from "./components/button-fuctions";
 import { Workspace, WorkspaceManager } from './components/workspaces.js';
-import { renderWorkspacesNav, addNavEventListeners, navRefresh } from './components/sidebar-controller.js';
+import { openNewDialogFunctionality, renderWorkspacesNav, addNavEventListeners, navRefresh } from './components/sidebar-controller.js';
 import { Todo } from './components/todo.js';
 import { populateWorkspaceDisplay } from './components/workspace-display-controller.js';
 
 const formCancelButtons = document.querySelectorAll('.cancel');
-const openNewDialogButtons = document.querySelectorAll('.openNewDialog');
 const dialogs = document.querySelectorAll('dialog');
 const workspaceDeleteButton = document.getElementById('editWorkspaceFormDelete');
 
@@ -15,13 +14,7 @@ formCancelButtons.forEach(button => {
     button.addEventListener('click', cancelForm);
 });
 
-// add event listeners to each open dialog button
-openNewDialogButtons.forEach(button => {
-    const dialogId = button.id.replace('Open', '');
-    const dialog = document.getElementById(dialogId);
-
-    button.addEventListener('click', () => {dialog.showModal()})
-})
+openNewDialogFunctionality();
 
 // add event listeners to each form submit button
 dialogs.forEach(dialog => {

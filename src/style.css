@@ -13,6 +13,25 @@
     --footer-link-col: #A88BFA;
     --footer-link-hover-col: #725ea8;
     --footer-link-active-col: #5031a7;
+    --modal-backdrop-col: rgba(30, 30, 30, 0.5);
+    --modal-border-col: #949494;
+    --form-background-col: #262626;
+    --input-background-col: #1e1e1e;
+    --input-border-col: #aaa9a9;
+    --input-border-focus-col: white; 
+    --radio-high-col: #ad3334;
+    --radio-high-hover-col: #e73535;
+    --radio-med-col: #eee16e;
+    --radio-med-hover-col: #f3cf02;
+    --radio-low-col: #5bbd4c;
+    --radio-low-hover-col: #5be745;
+    --radio-none-col: #949494;
+    --radio-none-hover-col: #c2c2c2;
+    --delete-workspace-btn-col: #e73535;
+    --delete-workspace-btn-hover-col: #aa2626;
+    --optional-tag-col: #949494;
+    --edit-btns-col: #dadada;
+    --edit-btns-hover-col: #aaa9a9;
 }
 
 /*---------------------------------*\
@@ -54,7 +73,7 @@ body {
     height: 100vh;
     display:grid;
     grid-template-rows: 1fr auto;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 350px 1fr;
     grid-template-areas: 
         "sidebar main"
         "sidebar footer";
@@ -67,6 +86,313 @@ body {
 
 #workspaceDisplay, footer {
     background-color: var(--display-and-footer-background-col);
+}
+
+/*---------------------------------*\
+|                                   |
+|           Dialog  Styles          |
+|                                   |
+\*---------------------------------*/
+dialog {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: fixed;
+    padding: 40px;
+    border-radius: 15px;
+    border: 3px solid var(--modal-border-col);
+    background-color: var(--form-background-col);
+}
+
+dialog::backdrop {
+    background-color: var(--modal-backdrop-col);
+    backdrop-filter: blur(1px);
+}
+
+/*---------------------------------*\
+|                                   |
+|        Forms & Input Styles       |
+|                                   |
+\*---------------------------------*/
+form h1 {
+    font-size: 40px;
+}
+
+#newTodoForm, 
+#newTodoTitleInput, 
+#newTodoDescInput, 
+#newTodoDueDateInput,
+#newTodoPriorityInput,
+#editTodoForm,
+#editTodoTitleInput,
+#editTodoDescInput,
+#editTodoDueDateInput,
+#editTodoPriorityInput,
+#moveTodoForm,
+#currentWorkspaceNameInput,
+#moveToWorkspaceNameInput,
+#newWorkspaceForm,
+#newWorkspaceNameInput,
+#editWorkspaceForm,
+#editWorkspaceNameInput {
+    display: flex;
+    flex-direction: column;
+}
+
+#newTodoDescInput,
+#editTodoDescInput {
+    height: 150px;
+}
+
+#newTodoForm,
+#editTodoForm,
+#moveTodoForm,
+#newWorkspaceForm,
+#editWorkspaceForm {
+    gap: 30px;
+}
+
+#newTodoDateAndPrio,
+#newTodoInputBtns,
+#editTodoDateAndPrio,
+#editTodoInputBtns {
+    display: flex;
+    gap: 30px;
+}
+
+#newTodoPriorityInput,
+#editTodoPriorityInput {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#newTodoInputBtns,
+#editTodoInputBtns {
+    justify-content:end;
+}
+
+label,
+legend {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.optional {
+    font-size: 16px;
+    color: var(--optional-tag-col);
+}
+
+input[type='date'] {
+    color-scheme: dark;
+}
+
+textarea {
+    resize: none;
+}
+
+input[type='text'], input[type='date'], textarea, select {
+    background-color: var(--input-background-col);
+    border-radius: 8px;
+    border: 2px solid var(--input-border-col);
+    font-size: 24px;
+    padding: 5px;
+}
+
+input[type='text']:focus, input[type='date']:focus {
+    border: 2px solid var(--input-border-focus-col);
+    outline: none;
+}
+
+#newTodoDesc, #editTodoDesc {
+    flex: 1;
+}
+
+input[type='radio'], input[type='checkbox'] {
+    height: 25px;
+    width: 25px;
+    margin: 10px;
+    padding: 0;
+    border-radius: 50%;
+    appearance: none; 
+    outline: none;   
+}
+
+input[type='radio']#newTodoHighPriority, 
+input[type='radio']#editTodoHighPriority,
+.todoContent input[type='checkbox'].high {
+    border: 2px solid var(--radio-high-col);
+    background: hsl(from var(--radio-high-col) h s l / .4);
+}
+
+input[type='radio']#newTodoHighPriority:not(:disabled):checked,
+input[type='radio']#editTodoHighPriority:not(:disabled):checked,
+.todoContent input[type='checkbox'].high:not(:disabled):checked {
+    border-color: var(--radio-high-col);
+    background-color: var(--radio-high-col);
+    background-clip: content-box;
+    padding: 2px;
+    background: radial-gradient(
+      circle,
+      var(--radio-high-col) 0%,
+      var(--radio-high-col) 50%,
+      transparent 60%,
+      transparent 100%
+    ), hsl(from var(--radio-high-col) h s l / .4) ;
+}
+
+input[type='radio']#newTodoMedPriority,
+input[type='radio']#editTodoMedPriority,
+.todoContent input[type='checkbox'].med {
+    border: 2px solid var(--radio-med-col);
+    background: hsl(from var(--radio-med-col) h s l / .4);
+}
+
+input[type='radio']#newTodoMedPriority:not(:disabled):checked,
+input[type='radio']#editTodoMedPriority:not(:disabled):checked,
+.todoContent input[type='checkbox'].med:not(:disabled):checked {
+    border-color: var(--radio-med-col);
+    background-color: var(--radio-med-col);
+    background-clip: content-box;
+    padding: 2px;
+    background: radial-gradient(
+      circle,
+      var(--radio-med-col) 0%,
+      var(--radio-med-col) 50%,
+      transparent 60%,
+      transparent 100%
+    ), hsl(from var(--radio-med-col) h s l / .4);
+}
+
+input[type='radio']#newTodoLowPriority,
+input[type='radio']#editTodoLowPriority,
+.todoContent input[type='checkbox'].low {
+    border: 2px solid var(--radio-low-col);
+    background: hsl(from var(--radio-low-col) h s l / .4);
+}
+
+input[type='radio']#newTodoLowPriority:not(:disabled):checked,
+input[type='radio']#editTodoLowPriority:not(:disabled):checked,
+.todoContent input[type='checkbox'].low:not(:disabled):checked {
+    border-color: var(--radio-low-col);
+    background-color: var(--radio-low-col);
+    background-clip: content-box;
+    padding: 2px;
+    background: radial-gradient(
+      circle,
+      var(--radio-low-col) 0%,
+      var(--radio-low-col) 50%,
+      transparent 60%,
+      transparent 100%
+    ), hsl(from var(--radio-low-col) h s l / .4);
+}
+
+input[type='radio']#newTodoNoPriority,
+input[type='radio']#editTodoNoPriority,
+.todoContent input[type='checkbox'].none {
+    border: 2px solid var(--radio-none-col);
+    background: hsl(from var(--radio-none-col) h s l / .4);
+}
+
+input[type='radio']#newTodoNoPriority:not(:disabled):checked,
+input[type='radio']#editTodoNoPriority:not(:disabled):checked,
+.todoContent input[type='checkbox'].none:not(:disabled):checked {
+    border-color: var(--radio-none-col);
+    background-color: var(--radio-none-col);
+    background-clip: content-box;
+    padding: 2px;
+    background: radial-gradient(
+      circle,
+      var(--radio-none-col) 0%,
+      var(--radio-none-col) 50%,
+      transparent 60%,
+      transparent 100%
+    ), hsl(from var(--radio-none-col) h s l / .4);
+}
+
+@media (hover: hover) {
+    input[type='radio']#newTodoHighPriority:not(:disabled):hover,
+    input[type='radio']#editTodoHighPriority:not(:disabled):hover,
+    .todoContent input[type='checkbox'].high:not(:disabled):hover {
+        background-color: hsl(from var(--radio-high-hover-col) h s l / .4);
+        outline: var(--radio-high-hover-col);
+    }
+
+    input[type='radio']#newTodoMedPriority:not(:disabled):hover,
+    input[type='radio']#editTodoMedPriority:not(:disabled):hover,
+    .todoContent input[type='checkbox'].med:not(:disabled):hover {
+        background-color: hsl(from var(--radio-med-hover-col) h s l / .4);
+        outline: var(--radio-med-hover-col);
+    }
+
+    input[type='radio']#newTodoLowPriority:not(:disabled):hover,
+    input[type='radio']#editTodoLowPriority:not(:disabled):hover,
+    .todoContent input[type='checkbox'].low:not(:disabled):hover {
+        background-color: hsl(from var(--radio-low-hover-col) h s l / .4);
+        outline: var(--radio-low-hover-col);
+    }
+
+    input[type='radio']#newTodoNoPriority:not(:disabled):hover,
+    input[type='radio']#editTodoNoPriority:not(:disabled):hover,
+    .todoContent input[type='checkbox'].none:not(:disabled):hover {
+        background-color: hsl(from var(--radio-none-hover-col) h s l / .4);
+        outline: var(--radio-none-hover-col);
+    }
+
+    form .formSubmit:hover {
+        background-color: var(--accent-col);
+        color: var(--sidebar-background-col);
+    }
+
+    form .cancel:hover {
+        border-color: var(--open-new-todo-btn-hover);
+        background-color: var(--open-new-todo-btn-hover);
+    }
+
+    form .workspaceDelete:hover {
+        border-color: var(--delete-workspace-btn-hover-col);
+        background-color: var(--delete-workspace-btn-hover-col);
+    }
+
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: white;
+    font-size: 16px;
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+fieldset {
+    border: none;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+/* Form buttons */
+form button  {
+    border: 2px solid;
+    border-radius: 8px;
+    font-weight: 1000;
+    font-size: 18px;
+    padding: 10px;
+}
+
+form .formSubmit {
+    border-color: var(--accent-col);
+    background-color: var(--sidebar-background-col);
+}
+
+form .cancel {
+    border-color: var(--open-new-todo-btn-col);
+    background-color: var(--open-new-todo-btn-col);
+    color: var(--sidebar-background-col);
+}
+
+form .workspaceDelete {
+    border-color: var(--delete-workspace-btn-col);
+    background-color: var(--delete-workspace-btn-col);
 }
 
 /*---------------------------------*\
@@ -122,6 +448,48 @@ body {
     background-color: var(--open-new-todo-btn-hover);
 }
 
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+.navButton {
+    background: none;
+    border:none;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+.workspaceEditButton {
+    background: none;
+    border: none;
+    padding: 2px 10px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.workspaceEditButton svg {
+    fill: var(--edit-btns-col);
+    height: 1.5em;
+    width: 1.5em;
+}
+
+@media (hover: hover) {
+    .navButton:hover .workspaceEditButton {
+        visibility: visible;
+    }
+
+    .workspaceEditButton:hover svg {
+        fill: var(--edit-btns-hover-col);
+    }
+}
+
 
 /*---------------------------------*\
 |                                   |
@@ -130,6 +498,84 @@ body {
 \*---------------------------------*/
 #workspaceDisplay {
     grid-area: main;
+    padding: 30px 75px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#workspaceDisplay > div > h1 {
+    font-size: 40px;
+}
+
+#todoDisplay {
+    padding-top: 5px;
+}
+
+.todo {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todoContent {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: repeat(auto, 3);
+    grid-template-areas: 
+        "checkbox title dueDate"
+        "description description description";
+    gap: 10px;
+    align-items: center;
+}
+
+.todoContent .todoCheckbox {
+    grid-area: checkbox;
+}
+
+.todoContent .todoTitle {
+    grid-area: title;
+}
+
+.todoContent .todoDescription {
+    grid-area: description;
+    margin-left: 10px;
+}
+
+.todoContent .todoDueDate {
+    grid-area: dueDate;
+}
+
+.todoChanges svg {
+    fill: var(--edit-btns-col);
+    height: 2em;
+    width: 2em;
+}
+
+@media (hover: hover) {
+    .todoOptions {
+        display: none;
+    }
+    .todo:hover .todoOptions {
+        display: inline-block;
+    }
+
+    .todoChanges:hover svg {
+        fill: var(--edit-btns-hover-col);
+    }
+}
+
+.todoButtons {
+    display: flex;
+    gap: 15px;
+}
+
+.todoChanges {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
 }
 
 /*---------------------------------*\

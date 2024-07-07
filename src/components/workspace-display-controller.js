@@ -24,11 +24,11 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
 
     workspaceTodoList.forEach(item => {
         const todoDiv = document.createElement('div');
+        const todoContent = document.createElement('div');
         const todoCheckbox = document.createElement('input');
         const todoTitle = document.createElement('h1');
         const todoDescription = document.createElement('p');
         const todoDueDate = document.createElement('p');
-        const todoPriority = document.createElement('p');
         const todoButtons = document.createElement('span');
         const todoEdit = document.createElement('button');
         const todoMove = document.createElement('button');
@@ -37,12 +37,19 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
         let thisTodo = WorkspaceManager.currentWorkspace.getTodoList()[thisTodoIdx];
 
         todoDiv.dataset.todo = item.title;
+
         todoTitle.innerHTML = item.title;
+        todoTitle.classList.add('todoTitle');
+
         todoDescription.innerHTML = item.description;
+        todoDescription.classList.add('todoDescription');
+
         todoDueDate.innerHTML = item.dueDate;
-        todoPriority.innerHTML = item.priority;
+        todoDueDate.classList.add('todoDueDate');
 
         todoCheckbox.type = 'checkbox';
+        todoCheckbox.classList.add('todoCheckbox');
+        todoCheckbox.classList.add(`${item.priority}`)
         todoCheckbox.checked = item.isComplete;
         todoCheckbox.setAttribute('id', `${item.title}Checkbox`);
         todoCheckbox.addEventListener('change', () => {
@@ -54,8 +61,8 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
         })
 
         // set up the edit button
-        todoEdit.innerHTML = 'EDIT';
-        todoEdit.classList.add('todoChanges');
+        todoEdit.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>file-edit-outline</title><path d="M10 20H6V4H13V9H18V12.1L20 10.1V8L14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H10V20M20.2 13C20.3 13 20.5 13.1 20.6 13.2L21.9 14.5C22.1 14.7 22.1 15.1 21.9 15.3L20.9 16.3L18.8 14.2L19.8 13.2C19.9 13.1 20 13 20.2 13M20.2 16.9L14.1 23H12V20.9L18.1 14.8L20.2 16.9Z" /></svg>'
+        todoEdit.classList.add('todoChanges', 'todoEdit');
         todoEdit.setAttribute('type', 'button');
 
         todoEdit.addEventListener('click', () => {
@@ -68,8 +75,8 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
         })
 
         // set up the move todo button
-        todoMove.innerHTML = 'MOVE';
-        todoMove.classList.add('todoChanges');
+        todoMove.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>file-move-outline</title><path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 20.41 4.12 20.8 4.34 21.12C4.41 21.23 4.5 21.33 4.59 21.41C4.95 21.78 5.45 22 6 22H13.53C13 21.42 12.61 20.75 12.35 20H6V4H13V9H18V12C18.7 12 19.37 12.12 20 12.34V8L14 2M18 23L23 18.5L20 15.8L18 14V17H14V20H18V23Z" /></svg>';
+        todoMove.classList.add('todoChanges', 'todoMove');
         todoMove.setAttribute('type', 'button');
 
         todoMove.addEventListener('click', () => {
@@ -84,6 +91,7 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
             const workspaceList = WorkspaceManager.getWorkspaceList();
 
             if (workspaceList.length > 0) {
+                
                 workspaceList.forEach(item => {
                     const newOption = document.createElement('option');
                     newOption.value = item.name;
@@ -97,8 +105,8 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
         })
 
         // set up the delete button
-        todoDelete.innerHTML = 'DELETE';
-        todoDelete.classList.add('todoChanges');
+        todoDelete.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>trash-can-outline</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>';
+        todoDelete.classList.add('todoChanges', 'todoDelete');
         todoDelete.setAttribute('type', 'button');
 
         todoDelete.addEventListener('click', () => {
@@ -109,12 +117,15 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
         todoButtons.appendChild(todoEdit);
         todoButtons.appendChild(todoMove);
         todoButtons.appendChild(todoDelete);
+        todoButtons.classList.add('todoOptions');
 
-        todoDiv.appendChild(todoCheckbox);
-        todoDiv.appendChild(todoTitle);
-        todoDiv.appendChild(todoDescription);
-        todoDiv.appendChild(todoDueDate);
-        todoDiv.appendChild(todoPriority);
+        todoContent.appendChild(todoCheckbox);
+        todoContent.appendChild(todoTitle);
+        todoContent.appendChild(todoDescription);
+        todoContent.appendChild(todoDueDate);
+        todoContent.classList.add('todoContent');
+
+        todoDiv.appendChild(todoContent);
         todoDiv.appendChild(todoButtons);
         todoDiv.classList.add('todo');
 

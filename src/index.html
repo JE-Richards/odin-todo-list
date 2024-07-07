@@ -9,53 +9,41 @@
     <!-- DIALOGS -->
     <dialog id="newTodoDialog">
         <form action="" id="newTodoForm">
-            <h1>New Todo</h1>
+            <h1>New To-do</h1>
+            <hr>
             <div id="newTodoTitleInput">
                 <label for="newTodoTitle">Title</label>
                 <input type="text" name="newTodoTitle" id="newTodoTitle" minlength="1" required>
             </div>
             <div id="newTodoDescInput">
                 <label for="newTodoDesc">Description <span class="optional">(optional)</span></label>
-                <input type="text" name="newTodoDesc" id="newTodoDesc">
+                <textarea name="newTodoDesc" id="newTodoDesc"></textarea>
             </div>
-            <div id="newTodoDueDateInput">
-                <label for="newTodoDueDate">Due Date</label>
-                <input type="date" name="newTodoDueDate" id="newTodoDueDate" required>
-            </div>
-            <div id="newTodoPriorityInput">
-                <fieldset>
-                    <legend>Priority</legend>
-
-                    <label>
-                        Low
+            <div id="newTodoDateAndPrio">
+                <div id="newTodoDueDateInput">
+                    <label for="newTodoDueDate">Due Date</label>
+                    <input type="date" name="newTodoDueDate" id="newTodoDueDate" required>
+                </div>
+                <div id="newTodoPriorityInput">
+                    <fieldset>
+                        <legend>Priority</legend>
                         <input type="radio" name="newTodoPriority" id="newTodoLowPriority" value="low">
-                    </label>
-
-                    <label>
-                        Medium
                         <input type="radio" name="newTodoPriority" id="newTodoMedPriority" value="med">
-                    </label>
-
-                    <label>
-                        High
                         <input type="radio" name="newTodoPriority" id="newTodoHighPriority" value="high">
-                    </label>
-
-                    <label>
-                        None
                         <input type="radio" name="newTodoPriority" id="newTodoNoPriority" value="none" checked="checked">
-                    </label>
-                </fieldset>
+                    </fieldset>
+                </div>
             </div>
             <div id="newTodoInputBtns">
-                <button type="submit" id="newTodoFormSubmit" form="newTodoForm" class="formSubmit">Add To-do</button>
+                <button type="submit" id="newTodoFormSubmit" form="newTodoForm" class="formSubmit">Create</button>
                 <button type="button" id="newTodoFormCancel" class="cancel">Cancel</button>
             </div>
         </form>
     </dialog>
     <dialog id="editTodoDialog">
         <form action="" id="editTodoForm">
-            <h1></h1>
+            <h1>Edit To-do</h1>
+            <hr>
             <!-- hidden input to store the id of the todo being edited -->
             <input type="hidden" name="todoIdForEdit" id="todoIdForEdit">
             <div id="editTodoTitleInput">
@@ -64,36 +52,22 @@
             </div>
             <div id="editTodoDescInput">
                 <label for="editTodoDesc">Description <span class="optional">(optional)</span></label>
-                <input type="text" name="editTodoDesc" id="editTodoDesc">
+                <textarea name="editTodoDesc" id="editTodoDesc"></textarea>
             </div>
-            <div id="editTodoDueDateInput">
-                <label for="editTodoDueDate">Due Date</label>
-                <input type="date" name="editTodoDueDate" id="editTodoDueDate" required>
-            </div>
-            <div id="editTodoPriorityInput">
-                <fieldset>
-                    <legend>Priority</legend>
-
-                    <label>
-                        Low
+            <div id="editTodoDateAndPrio">
+                <div id="editTodoDueDateInput">
+                    <label for="editTodoDueDate">Due Date</label>
+                    <input type="date" name="editTodoDueDate" id="editTodoDueDate" required>
+                </div>
+                <div id="editTodoPriorityInput">
+                    <fieldset>
+                        <legend>Priority</legend>
                         <input type="radio" name="editTodoPriority" id="editTodoLowPriority" value="low">
-                    </label>
-
-                    <label>
-                        Medium
                         <input type="radio" name="editTodoPriority" id="editTodoMedPriority" value="med">
-                    </label>
-
-                    <label>
-                        High
                         <input type="radio" name="editTodoPriority" id="editTodoHighPriority" value="high">
-                    </label>
-
-                    <label>
-                        None
                         <input type="radio" name="editTodoPriority" id="editTodoNoPriority" value="none">
-                    </label>
-                </fieldset>
+                    </fieldset>
+                </div>
             </div>
             <div id="editTodoInputBtns">
                 <button type="submit" id="editTodoFormSubmit" form="editTodoForm" class="formSubmit">Submit Changes</button>
@@ -103,6 +77,8 @@
     </dialog>
     <dialog id="moveTodoDialog">
         <form action="" id="moveTodoForm">
+            <h1>Move To-do</h1>
+            <hr>
             <!-- hidden input to store the id of the todo being moved -->
             <input type="hidden" name="todoIdForMove" id="todoIdForMove">
             <div id="currentWorkspaceNameInput">
@@ -124,12 +100,13 @@
     <dialog id="newWorkspaceDialog">
         <form action="" id="newWorkspaceForm">
             <h1>New Workspace</h1>
+            <hr>
             <div id="newWorkspaceNameInput">
                 <label for="newWorkspaceName">Name</label>
                 <input type="text" name="newWorkspaceName" id="newWorkspaceName" minlength="1" required>
             </div>
             <div id="newWorkspaceInputBtns">
-                <button type="submit" id="newWorkspaceFormSubmit" form="newWorkspaceForm" class="formSubmit">Create Workspace</button>
+                <button type="submit" id="newWorkspaceFormSubmit" form="newWorkspaceForm" class="formSubmit">Create</button>
                 <button type="button" id="newWorkspaceFormCancel" class="cancel">Cancel</button>
             </div>
         </form>
@@ -137,6 +114,7 @@
     <dialog id="editWorkspaceDialog">
         <form action="" id="editWorkspaceForm">
             <h1>Edit Workspace</h1>
+            <hr>
             <!-- hidden input to store the id of the workspace being edited -->
             <input type="hidden" name="workspaceIdForEdit" id="workspaceIdForEdit">
             <div id="editWorkspaceNameInput">
