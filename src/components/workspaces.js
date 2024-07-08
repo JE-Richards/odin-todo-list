@@ -1,21 +1,27 @@
 class Workspace {
 
     #name;
+    #color
     #todoList;
     #isEditable;
 
-    constructor (name) {
+    constructor (name, color='#dadada') {
         if (!name || typeof name !== 'string') {
             throw new Error("Workspace name must be a non-empty string");
         }
 
         this.#name = name;
+        this.#color = color;
         this.#todoList = []
         this.#isEditable = Boolean(true);
     }
    
     get name() {
         return this.#name;
+    }
+    
+    get color() {
+        return this.#color;
     }
 
     get isEditable() {
@@ -28,6 +34,10 @@ class Workspace {
         }
 
         this.#name = newName;
+    }
+
+    set color(newColor) {
+        this.#color = newColor;
     }
 
     set isEditable(newStatus) {
@@ -70,10 +80,11 @@ class WorkspaceManager {
         WorkspaceManager.#workspaceList.splice(idx, 1);
     }
 
-    static editWorkspace(workspaceName, editedName) {
+    static editWorkspace(workspaceName, editedName, editedColor) {
         let idx = WorkspaceManager.#workspaceList.findIndex(item => item.name === workspaceName);
         
         WorkspaceManager.#workspaceList[idx].name = editedName;
+        WorkspaceManager.#workspaceList[idx].color = editedColor;
     }
 
     static setCurrentWorkspace(workspaceName) {

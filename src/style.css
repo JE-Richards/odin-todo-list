@@ -77,7 +77,7 @@ body {
     grid-template-areas: 
         "sidebar main"
         "sidebar footer";
-    
+    background: var(--display-and-footer-background-col);
 }
 
 .accent {
@@ -85,7 +85,7 @@ body {
 }
 
 #workspaceDisplay, footer {
-    background-color: var(--display-and-footer-background-col);
+    background-color: hsl(from var(--display-and-footer-background-col) h s l / 0.975);
 }
 
 /*---------------------------------*\
@@ -133,8 +133,10 @@ form h1 {
 #moveToWorkspaceNameInput,
 #newWorkspaceForm,
 #newWorkspaceNameInput,
+#newWorkspaceColInput,
 #editWorkspaceForm,
-#editWorkspaceNameInput {
+#editWorkspaceNameInput,
+#editWorkspaceColInput {
     display: flex;
     flex-direction: column;
 }
@@ -155,7 +157,10 @@ form h1 {
 #newTodoDateAndPrio,
 #newTodoInputBtns,
 #editTodoDateAndPrio,
-#editTodoInputBtns {
+#editTodoInputBtns,
+#moveTodoInputBtns,
+#newWorkspaceInputBtns,
+#editWorkspaceInputBtns {
     display: flex;
     gap: 30px;
 }
@@ -167,8 +172,12 @@ form h1 {
 }
 
 #newTodoInputBtns,
-#editTodoInputBtns {
-    justify-content:end;
+#editTodoInputBtns,
+#moveTodoInputBtns,
+#newWorkspaceInputBtns,
+#editWorkspaceInputBtns {
+    justify-content: end;
+    flex-wrap: nowrap;
 }
 
 label,
@@ -184,6 +193,29 @@ legend {
 
 input[type='date'] {
     color-scheme: dark;
+}
+
+input[type='color'] {
+    color-scheme: dark;
+    width: 100%;
+    height: 38px;
+    border-radius: 8px;
+    border: 2px solid var(--input-border-col);
+    background-color: var(--input-border-col);
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+input[type='color']::-webkit-color-swatch {
+    border: none;
+    border-radius: 8px;
+    padding: 0;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+    border-radius: 8px;
+    padding: 0;
 }
 
 textarea {
@@ -457,13 +489,18 @@ nav {
 
 .navButton {
     background: none;
-    border:none;
+    border-left: transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 0px transparent;
+    border-top: 0px transparent;
+    border-radius: 8px 0px 0px 8px;
     font-size: 18px;
     font-weight: 700;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex: 1;
+    padding: 0px 5px;
 }
 
 .workspaceEditButton {

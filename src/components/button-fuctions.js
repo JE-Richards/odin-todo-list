@@ -88,8 +88,9 @@ function moveTodoSubmit() {
 
 function newWorkspaceSubmit() {
     const name = document.getElementById('newWorkspaceName').value;
+    const color = document.getElementById('newWorkspaceCol').value;
 
-    WorkspaceManager.addToWorkspace(new Workspace(name));
+    WorkspaceManager.addToWorkspace(new Workspace(name, color));
     WorkspaceManager.setCurrentWorkspace(name);
     navRefresh(
         WorkspaceManager.getWorkspaceList(),
@@ -101,10 +102,11 @@ function newWorkspaceSubmit() {
 function editWorkspaceSubmit() {
     // get needed values for edit
     const editedName = document.getElementById('editWorkspaceName').value;
+    const editedColor = document.getElementById('editWorkspaceCol').value;
     const workspaceName = document.getElementById('workspaceIdForEdit').value;
 
     // run the edit function
-    WorkspaceManager.editWorkspace(workspaceName, editedName);
+    WorkspaceManager.editWorkspace(workspaceName, editedName, editecCol);
 
     // make the edited workspace the current workspace to make populating the workspace display easier
     WorkspaceManager.setCurrentWorkspace(editedName);
