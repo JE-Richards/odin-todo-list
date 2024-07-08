@@ -1,4 +1,4 @@
-import { isValid, format, parseISO } from 'date-fns';
+import { isValid, format, parseISO, parse } from 'date-fns';
 
 class Todo {
     #title;
@@ -7,7 +7,7 @@ class Todo {
     #priority;
     #isComplete;
 
-    constructor (title, description, dueDate, priority) {
+    constructor (title, description, dueDate, priority, isComplete=false) {
         if (!title || typeof title !== 'string') {
             throw new Error("Title must be a non-empty string");
         }
@@ -22,7 +22,7 @@ class Todo {
         this.#description = description;
         this.#dueDate = format(parsedDate, 'dd MMM yyyy');
         this.#priority = priority;
-        this.#isComplete = false;
+        this.#isComplete = isComplete;
     }
 
     get title() {
@@ -77,6 +77,35 @@ class Todo {
 
     static toggleComplete(todo) {
         (todo.isComplete === false) ? (todo.isComplete = true) : (todo.isComplete = false);
+    }
+
+    static serialize(todo) {
+        return {
+            title: todo.#title,
+            description: todo.#description,
+            dueDate: todo.#dueDate,
+            priority: todo.#priority,
+            isComplete: todo.#isComplete
+        }
+    }
+
+    static deserialize(data) {
+        const date = new Date(data.dueDate);
+
+        // get full year
+        let year = date.getFullYear();
+
+        // getMonth is zero based months, so add 1 to get correct month
+        // slice to ensure leading zero kept
+        let month = ('0' + (date.getMonth() + 1)).slice(-2);
+
+        // slice to make sure leading zeros kept for days < 10
+        let day = ('0' + date.getDate()).slice(-2);
+
+        // format for correct input to Todo
+        let formattedDate = `${year}-${month}-${day}`;
+
+        return new Todo(data.title, data.description, formattedDate, data.priority, data.isComplete);
     }
 }
 

@@ -1,3 +1,5 @@
+import { Todo } from "./todo";
+
 class Workspace {
 
     #name;
@@ -60,6 +62,22 @@ class Workspace {
         let idx = this.#todoList.findIndex(item => item.title === todoTitle);
         this.#todoList.splice(idx, 1);
     }
+
+    static serialize(workspace) {
+        return {
+            name: workspace.#name,
+            color: workspace.#color,
+            todoList: workspace.#todoList.map(todo => Todo.serialize(todo)),
+            isEditable: workspace.#isEditable
+        }
+    }
+
+    static deserialize(data) {
+        const workspace = new Workspace(data.name, data.color)
+        workspace.#todoList = data.todoList.map(todo => Todo.deserialize(todo));
+        workspace.#isEditable = data.isEditable;
+        return workspace;
+    }
 }
 
 class WorkspaceManager {
@@ -96,6 +114,45 @@ class WorkspaceManager {
         else {
             throw new Error("Workspace not found");
         }
+    }
+
+    static serializeWsList() {
+        return JSON.stringify(WorkspaceManager.#workspaceList.map(ws => Workspace.serialize(ws)));
+    }
+
+    static deserializeWsList(data) {
+        const parsedData = JSON.parse(data);
+
+        WorkspaceManager.#workspaceList = parsedData.map(ws => Workspace.deserialize(ws));
+    }
+
+    static serializeCurrentWs() {
+        return WorkspaceManager.currentWorkspace ?  JSON.stringify(Workspace.serialize(WorkspaceManager.currentWorkspace)) : null;
+    }
+
+    static deserializeCurrentWs(data) {
+        if (data) {
+            WorkspaceManager.currentWorkspace = Workspace.deserialize(JSON.parse(data));
+        }
+        else {
+            WorkspaceManager.currentWorkspace = 'Inbox'
+        }
+    }
+
+    static saveToLocalStorage() {
+        const serializedWSList = WorkspaceManager.serializeWsList();
+        const serializedCurrentWs = WorkspaceManager.serializeCurrentWs();
+
+        localStorage.setItem('workspaceList', serializedWSList);
+        localStorage.setItem('currentWorkspace', serializedCurrentWs);
+    }
+
+    static loadFromLocalStorage() {
+        const workspaceListData = localStorage.getItem('workspaceList');
+        const currentWorkspaceData = localStorage.getItem('currentWorkspace');
+
+        WorkspaceManager.deserializeWsList(workspaceListData);
+        WorkspaceManager.deserializeCurrentWs(currentWorkspaceData);
     }
 
 }

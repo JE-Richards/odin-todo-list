@@ -67,6 +67,7 @@ function addNavEventListeners() {
             WorkspaceManager.setCurrentWorkspace(button.getAttribute('id'));
             highlightCurrentWorkspaceNav(button.getAttribute('id'));
             populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+            WorkspaceManager.saveToLocalStorage();
         })
 
         const editSpan = button.querySelector('span.workspaceEditButton');

@@ -9,59 +9,78 @@ const formCancelButtons = document.querySelectorAll('.cancel');
 const dialogs = document.querySelectorAll('dialog');
 const workspaceDeleteButton = document.getElementById('editWorkspaceFormDelete');
 
-// add event listeners to each cancel button
-formCancelButtons.forEach(button => {
-    button.addEventListener('click', cancelForm);
-});
+function initializeApp() {
+    // add event listeners to each cancel button
+    formCancelButtons.forEach(button => {
+        button.addEventListener('click', cancelForm);
+    });
 
-openNewDialogFunctionality();
+    openNewDialogFunctionality();
 
-// add event listeners to each form submit button
-dialogs.forEach(dialog => {
-    const form = dialog.querySelector('form');
+    // add event listeners to each form submit button
+    dialogs.forEach(dialog => {
+        const form = dialog.querySelector('form');
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const formId = form.getAttribute('id');
-        formSubmitFunctions[formId]();
-        form.reset();
-        dialog.close();
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formId = form.getAttribute('id');
+            formSubmitFunctions[formId]();
+            form.reset();
+            dialog.close();
+        })
     })
-})
 
-// Add delte functionality to workspace delete button
-workspaceDeleteButton.addEventListener('click', (event) => {
-    editWorkspaceDelete(event);
-});
+    // Add delte functionality to workspace delete button
+    workspaceDeleteButton.addEventListener('click', (event) => {
+        editWorkspaceDelete(event);
+    });
 
-// create a default workspace and render all workspaces
-function createInboxWorkspace() {
-    WorkspaceManager.addToWorkspace(
-        new Workspace('Inbox')
-    );
+    if (!localStorage) {
+        // create a default workspace and render all workspaces
+        function createInboxWorkspace() {
+            WorkspaceManager.addToWorkspace(
+                new Workspace('Inbox')
+            );
 
-    WorkspaceManager.setCurrentWorkspace('Inbox');
-    WorkspaceManager.currentWorkspace.isEditable = false;
-    WorkspaceManager.currentWorkspace.addNewTodo(
-        new Todo(
-            'Title Test',
-            'Description Test',
-            "2024-07-22",
-            'none'
+            WorkspaceManager.setCurrentWorkspace('Inbox');
+            WorkspaceManager.currentWorkspace.isEditable = false;
+            WorkspaceManager.currentWorkspace.addNewTodo(
+                new Todo(
+                    'Title Test',
+                    'Description Test',
+                    "2024-07-22",
+                    'none'
+                )
+            )
+
+            navRefresh(
+                WorkspaceManager.getWorkspaceList(),
+                WorkspaceManager.currentWorkspace.name
+            )
+            populateWorkspaceDisplay(
+                WorkspaceManager.currentWorkspace,
+                WorkspaceManager.currentWorkspace.getTodoList()
+            )
+        }
+        createInboxWorkspace();
+    }
+    else {
+        WorkspaceManager.loadFromLocalStorage();
+
+        navRefresh(
+            WorkspaceManager.getWorkspaceList(),
+            WorkspaceManager.currentWorkspace.name
         )
-    )
-
-    navRefresh(
-        WorkspaceManager.getWorkspaceList(),
-        WorkspaceManager.currentWorkspace.name
-    )
-    populateWorkspaceDisplay(
-        WorkspaceManager.currentWorkspace,
-        WorkspaceManager.currentWorkspace.getTodoList()
-    )
+        populateWorkspaceDisplay(
+            WorkspaceManager.currentWorkspace,
+            WorkspaceManager.currentWorkspace.getTodoList()
+        )
+    }
 }
-createInboxWorkspace();
+
+initializeApp();
 
 // temporary inclusion for testing purposes
 window.WorkspaceManager = WorkspaceManager;
+window.Workspace = Workspace;
 window.Todo = Todo;

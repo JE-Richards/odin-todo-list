@@ -27,6 +27,7 @@ function newTodoSubmit() {
 
     WorkspaceManager.currentWorkspace.addNewTodo(new Todo(title, desc, dueDate, priority));
     populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+    WorkspaceManager.saveToLocalStorage();
 }
 
 function editTodoSubmit() {
@@ -54,6 +55,7 @@ function editTodoSubmit() {
     todo.priority = priority;
 
     populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+    WorkspaceManager.saveToLocalStorage();
 }
 
 function moveTodoSubmit() {
@@ -84,6 +86,7 @@ function moveTodoSubmit() {
 
     // refresh display
     populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+    WorkspaceManager.saveToLocalStorage();
 }
 
 function newWorkspaceSubmit() {
@@ -97,6 +100,7 @@ function newWorkspaceSubmit() {
         name
     );
     populateWorkspaceDisplay(WorkspaceManager.currentWorkspace, WorkspaceManager.currentWorkspace.getTodoList());
+    WorkspaceManager.saveToLocalStorage();
 }
 
 function editWorkspaceSubmit() {
@@ -106,7 +110,7 @@ function editWorkspaceSubmit() {
     const workspaceName = document.getElementById('workspaceIdForEdit').value;
 
     // run the edit function
-    WorkspaceManager.editWorkspace(workspaceName, editedName, editecCol);
+    WorkspaceManager.editWorkspace(workspaceName, editedName, editedColor);
 
     // make the edited workspace the current workspace to make populating the workspace display easier
     WorkspaceManager.setCurrentWorkspace(editedName);
@@ -122,6 +126,8 @@ function editWorkspaceSubmit() {
         WorkspaceManager.currentWorkspace,
         WorkspaceManager.currentWorkspace.getTodoList()
     );
+
+    WorkspaceManager.saveToLocalStorage();
 }
 
 function editWorkspaceDelete(event) {
@@ -147,6 +153,7 @@ function editWorkspaceDelete(event) {
                 WorkspaceManager.currentWorkspace.name
             )
 
+            WorkspaceManager.saveToLocalStorage();
             dialog.close();
         }
     }

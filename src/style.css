@@ -65,8 +65,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'montserratregular', Helvetica, sans-serif;
+    font-family: 'ralewayregular', 'montserratregular', Helvetica, sans-serif;
     color: var(--font-col);
+}
+
+.period, .navPeriod, .displayPeriod {
+    font-family: 'montserratregular', 'ralewayregular', Helvetica, sans-serif;
 }
 
 body {

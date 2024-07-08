@@ -14,7 +14,7 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
     workspaceDisplay.innerHTML = '';
 
     // populate a content header
-    contentHeader.innerHTML = `<span class='period'>.</span>${workspace.name}`;
+    contentHeader.innerHTML = `<span class='displayPeriod'>.</span>${workspace.name}`;
     contentHeaderDiv.appendChild(contentHeader);
     workspaceDisplay.appendChild(contentHeaderDiv);
     workspaceDisplay.appendChild(hr);
