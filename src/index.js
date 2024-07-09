@@ -35,7 +35,7 @@ function initializeApp() {
         editWorkspaceDelete(event);
     });
 
-    if (!localStorage) {
+    if (localStorage.getItem('workspaceList') === null) {
         // create a default workspace and render all workspaces
         function createInboxWorkspace() {
             WorkspaceManager.addToWorkspace(

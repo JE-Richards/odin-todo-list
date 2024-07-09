@@ -46,7 +46,7 @@ function editTodoSubmit() {
     // Select the todo object
     const todoId = document.getElementById('todoIdForEdit').value;
     let idx = WorkspaceManager.currentWorkspace.getTodoList().findIndex(item => item.title === todoId);
-    let todo = WorkspaceManager.currentWorkspace.getTododList()[idx];
+    let todo = WorkspaceManager.currentWorkspace.getTodoList()[idx];
 
     // edit the todo
     todo.title = title;
