@@ -71,19 +71,26 @@ function addNavEventListeners() {
         })
 
         const editSpan = button.querySelector('span.workspaceEditButton');
-        if (editSpan) {
-            editSpan.setAttribute('id', `${button.id}Edit`);
-            editSpan.addEventListener('click', (event) => {
-                // Use stop propagation to prevent the click from triggering the parent button
-                event.stopPropagation();
+        if (button.id === 'Inbox') {
+            if (editSpan) {
+                editSpan.style.display = 'none';
+            }
+        }
+        else {
+            if (editSpan) {
+                editSpan.setAttribute('id', `${button.id}Edit`);
+                editSpan.addEventListener('click', (event) => {
+                    // Use stop propagation to prevent the click from triggering the parent button
+                    event.stopPropagation();
 
-                // Need the form to store a hidden input value which can be referenced to access the correct
-                // workspace when submitting the edit
-                document.getElementById('workspaceIdForEdit').value = editSpan.parentElement.id;
-                prepopulateWorkspaceEdit(WorkspaceManager.currentWorkspace);
-                const dialog = document.getElementById('editWorkspaceDialog');
-                dialog.showModal();
-            } )
+                    // Need the form to store a hidden input value which can be referenced to access the correct
+                    // workspace when submitting the edit
+                    document.getElementById('workspaceIdForEdit').value = editSpan.parentElement.id;
+                    prepopulateWorkspaceEdit(WorkspaceManager.currentWorkspace);
+                    const dialog = document.getElementById('editWorkspaceDialog');
+                    dialog.showModal();
+                } )
+            }
         }
     })
 }

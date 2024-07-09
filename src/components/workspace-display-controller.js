@@ -8,13 +8,17 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
     const contentHeaderDiv = document.createElement('div');
     const contentHeader = document.createElement('h1');
     const hr = document.createElement('hr');
-    const todoDisplay = document.createElement('div')
+    const todoDisplay = document.createElement('div');
+    const body = document.querySelector('body');
+    const workspaceCol = body.style.backgroundColor;
 
     // clear previous content
     workspaceDisplay.innerHTML = '';
 
     // populate a content header
-    contentHeader.innerHTML = `<span class='displayPeriod'>.</span>${workspace.name}`;
+    contentHeader.innerHTML = `<span class='displayPeriod' style="color: ${workspaceCol}">.</span>${workspace.name}`;
+    hr.style.borderColor = workspaceCol;
+
     contentHeaderDiv.appendChild(contentHeader);
     workspaceDisplay.appendChild(contentHeaderDiv);
     workspaceDisplay.appendChild(hr);

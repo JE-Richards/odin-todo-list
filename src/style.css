@@ -74,6 +74,15 @@
     font-family: 'montserratregular', 'ralewayregular', Helvetica, sans-serif;
 }
 
+
+.period, .displayPeriod {
+    font-size: 50px;
+}
+
+.navPeriod {
+    font-size: 32px;
+}
+
 body {
     height: 100vh;
     display:grid;
