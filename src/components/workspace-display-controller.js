@@ -58,6 +58,7 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
 
             // add a complete class to the todo div for use in styling
             (thisTodo.isComplete === true) ? (todoDiv.classList.add('complete')) : (todoDiv.classList.remove('complete'));
+            WorkspaceManager.saveToLocalStorage();
         })
 
         // set up the edit button
@@ -127,7 +128,7 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
 
         todoDiv.appendChild(todoContent);
         todoDiv.appendChild(todoButtons);
-        todoDiv.classList.add('todo');
+        (item.isComplete === false) ? todoDiv.classList.add('todo') : todoDiv.classList.add('todo', 'complete');
 
         todoDisplay.appendChild(todoDiv);
     })

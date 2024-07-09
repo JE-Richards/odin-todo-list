@@ -10,6 +10,7 @@
     --open-new-todo-btn-col: #dadada;
     --open-new-todo-btn-hover: #aaa9a9;
     --font-col: #dadada;
+    --font-darker-col: #aaa9a9;
     --footer-link-col: #A88BFA;
     --footer-link-hover-col: #725ea8;
     --footer-link-active-col: #5031a7;
@@ -577,6 +578,7 @@ nav {
 
 .todoContent .todoTitle {
     grid-area: title;
+    font-size: 26px;
 }
 
 .todoContent .todoDescription {
@@ -617,6 +619,21 @@ nav {
     border: none;
     padding: 10px;
     cursor: pointer;
+}
+
+/* Styling for complete todo */
+
+.todo.complete .todoTitle {
+    text-decoration: line-through;
+    color: var(--font-darker-col);
+}
+
+.todo.complete .todoDescription {
+    display: none;
+}
+
+.todo.complete .todoDueDate {
+    display: none;
 }
 
 /*---------------------------------*\

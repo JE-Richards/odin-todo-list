@@ -7,7 +7,7 @@ class Workspace {
     #todoList;
     #isEditable;
 
-    constructor (name, color='#dadada') {
+    constructor (name, color='#A88BFA') {
         if (!name || typeof name !== 'string') {
             throw new Error("Workspace name must be a non-empty string");
         }
