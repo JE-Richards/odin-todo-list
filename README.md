@@ -28,7 +28,7 @@ This design of this app is inspired heavily by [Todoist](https://todoist.com/) a
 The project dependencies are managed via npm and webpack and can be found in [package.json](package.json).
 
 ## The Web App
-To use the app, please visit: https://je-richards.github.io/to-do-app/
+To use the app, please visit: https://je-richards.github.io/odin-todo-list/
 
 ## Key Learnings
 ### Clearly Plan and Scope a Project Upfront
