@@ -561,6 +561,9 @@ nav {
 
 #todoDisplay {
     padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .todo {

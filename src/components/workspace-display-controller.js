@@ -96,7 +96,7 @@ function populateWorkspaceDisplay(workspace, workspaceTodoList) {
             const workspaceList = WorkspaceManager.getWorkspaceList();
 
             if (workspaceList.length > 0) {
-                
+                moveSelectInput.innerHTML = '';
                 workspaceList.forEach(item => {
                     const newOption = document.createElement('option');
                     newOption.value = item.name;
